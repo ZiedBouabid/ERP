@@ -9,8 +9,8 @@ export class CompetencesController {
     }
     @Get('getCompetences')
     async getCompetences(): Promise<competences[]> {
-        return await this.CompetencesService.getCompetences();
-      }
+        return await this.CompetencesService.getCompetencesTypes();
+    }
 
 
 

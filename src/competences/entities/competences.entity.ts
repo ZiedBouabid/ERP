@@ -4,7 +4,7 @@ import { fournisseur } from 'src/fournisseur/entities/fournisseur.entity';
 @Entity()
 export class competences extends BaseEntity{
   
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('increment')
   id: number;
 
   @Column()
@@ -12,6 +12,4 @@ export class competences extends BaseEntity{
   
   @ManyToOne(()=> fournisseur,(fournisseur) => fournisseur.competences)
   fournisseur : fournisseur
-
-  
 }

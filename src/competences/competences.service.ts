@@ -10,7 +10,11 @@ export class CompetencesService {
         
     }
 
-    async getCompetences(): Promise<competences[]> {
-        return await this.competencesRepository.find();
-      }
+    async getCompetencesTypes(): Promise<competences[]> {
+        return await this.competencesRepository.createQueryBuilder(competences.name).select('competences.type')
+        .distinct(true)
+        .getRawMany();;
+    }
+
+    
 }

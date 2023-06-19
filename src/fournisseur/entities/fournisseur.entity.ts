@@ -1,3 +1,4 @@
+import { mission } from './../../mission/entities/mission.entity';
 import { ManyToMany, JoinTable, OneToMany, Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BaseEntity, JoinColumn } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { User } from 'src/users/entities/user.entity';
@@ -8,7 +9,7 @@ import { PipelineDestinationPromiseFunction } from 'stream';
 @Entity()
 export class fournisseur extends BaseEntity{
  
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('increment')
   id: number;
   @Column()
   nom: string;
@@ -29,6 +30,14 @@ export class fournisseur extends BaseEntity{
     }
   )
   certifications: certification[];
+
+  @OneToMany(type => mission,(mission) => mission.fournisseur,
+    {
+      nullable: true,
+      cascade: true
+    }
+  )
+  missions: mission[];
 
   @OneToMany(type => competences, (competences) => competences.fournisseur,
     {
