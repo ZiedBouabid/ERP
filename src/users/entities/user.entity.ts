@@ -23,7 +23,10 @@ export class User extends BaseEntity{
 
   @Column()
   tele : string;
-  
+
+  @Column()
+  secondeRole : string
+
   @OneToMany(
     type => mission,
     (mission) => mission,

@@ -13,7 +13,6 @@ export class FournisseurService {
         return await this.fournisseurRepository.find({
           relations: {
             competences : true,
-            produits : true,
             certifications: true
         },
         });

@@ -1,3 +1,5 @@
+import { fournisseur } from 'src/fournisseur/entities/fournisseur.entity';
+import { produit } from 'src/produit/entities/produit.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -13,7 +15,9 @@ export class MissionService {
 		async getMissions(): Promise<mission[]> {
 				return await this.missionRepository.find({
 						relations: {
-							produits : true,
+							produits : {
+								fournisseurs : true
+							}
 					},
 					});
 		}

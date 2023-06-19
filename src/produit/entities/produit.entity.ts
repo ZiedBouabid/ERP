@@ -11,9 +11,19 @@ export class produit extends BaseEntity{
 
 	@ManyToOne(()=> mission,(mission) => mission.produits)
 	mission : mission
-	
 
-
-
+	@ManyToMany(() => fournisseur)
+  @JoinTable({
+      name: 'FournisseurProduit', 
+      joinColumn: {
+          name: "produitId",
+          referencedColumnName: "id"
+      },
+      inverseJoinColumn: {
+          name: "fournisseurId",
+          referencedColumnName: "id"
+      } 
+  })
+  fournisseurs: fournisseur[]; 
 	
 }

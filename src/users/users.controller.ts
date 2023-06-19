@@ -28,6 +28,11 @@ export class UsersController {
 
     return await this.Service.createUser(user);
   }
+
+  @Post("getChplns")
+  async getChpln() {
+    return await this.Service.getChplns();
+  }
   // This route will require successfully passing our default auth strategy (JWT) in order
   // to access the route
   @Get('test')

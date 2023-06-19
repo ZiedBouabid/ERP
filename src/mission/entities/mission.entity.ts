@@ -25,9 +25,6 @@ export class mission extends BaseEntity{
   @Column()
   datefin: Date;
 
-  @OneToOne(()=> fournisseur,(fournisseur) => fournisseur.missions)
-  @JoinColumn()
-  fournisseur : fournisseur;
 
   @OneToMany(type => produit, (produit) => produit.mission,
     {

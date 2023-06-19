@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
 
@@ -42,4 +42,13 @@ export class UsersService {
   async updateUser(user: User) {
     this.usersRepository.save(user);
   }
+   
+  async getChplns(): Promise<User[]> {
+    return await this.usersRepository.find({
+      where: {
+        secondeRole:Not('') ,
+    },
+    });
+  }
+
 }
