@@ -15,19 +15,32 @@ import { CompetencesModule } from './competences/competences.module';
 import { CertificationModule } from './certification/certification.module';
 import { certification } from './certification/entities/certification.entity';
 import { competences } from './competences/entities/competences.entity';
+import { CommandeModule } from './commande/commande.module';
+import { FactureModule } from './facture/facture.module';
+import { MessageModule } from './message/message.module';
+import { CongeModule } from './conge/conge.module';
+import { AttestationModule } from './attestation/attestation.module';
+import { Commande } from './commande/entities/commande.entity';
+import { Facture } from './facture/entities/facture.entity';
+import { Conge } from './conge/entities/conge.entity';
+import { Message } from './message/entities/message.entity';
+import { Attestation } from './attestation/entities/attestation.entity';
+import { DataSource } from 'typeorm';
+import { SeedModule } from './seed/seed.module';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
       port: 3306,
-      username: 'root',
-      password: '',
+      username: 'zied',
+      password: 'azertyS20645307',
       database: 'my_nestjs_project',
-      entities: [User,mission,fournisseur,produit,certification,competences],
+      entities: [User,mission,fournisseur,produit,certification,competences,Commande,Facture,Conge,Message,Attestation],
       synchronize: false,
       dropSchema: false,
-      autoLoadEntities: true,
+      autoLoadEntities: false ,
     }),
     UsersModule,
     AuthModule,
@@ -36,9 +49,17 @@ import { competences } from './competences/entities/competences.entity';
     ProduitModule,
     CompetencesModule,
     CertificationModule,
+    CommandeModule,
+    FactureModule,
+    MessageModule,
+    CongeModule,
+    AttestationModule,
+    SeedModule,
     
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private dataSource: DataSource) {}
+}

@@ -20,18 +20,28 @@ import * as bcrypt from 'bcrypt';
 
 @Controller('users')
 export class UsersController {
-  constructor(private Service: UsersService) {}
+  constructor(private Service: UsersService) { }
 
   @Post("addUser")
   async create(@Body() user: User) {
-     user.password = await bcrypt.hash(user.password, 10);
+    user.password = await bcrypt.hash(user.password, 10);
 
     return await this.Service.createUser(user);
   }
 
-  @Post("getChplns")
+  @Post("updateUser")
+  async updateUser(@Body() user: User) {
+    return await this.Service.updateUser(user);
+  }
+
+  @Get("getChplns")
   async getChpln() {
     return await this.Service.getChplns();
+  }
+
+  @Get("getEmployes")
+  async getEmployes() {
+    return await this.Service.getEmployes();
   }
   // This route will require successfully passing our default auth strategy (JWT) in order
   // to access the route

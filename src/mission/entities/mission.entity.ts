@@ -1,8 +1,9 @@
 import { produit } from './../../produit/entities/produit.entity';
 import { fournisseur } from './../../fournisseur/entities/fournisseur.entity';
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BaseEntity, OneToOne, JoinColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BaseEntity, OneToOne, JoinColumn, OneToMany, ManyToOne } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { User } from 'src/users/entities/user.entity';
+import { Commande } from 'src/commande/entities/commande.entity';
 
 @Entity()
 export class mission extends BaseEntity{
@@ -15,6 +16,9 @@ export class mission extends BaseEntity{
 
   @Column()
   type: string;
+  
+  @Column()
+  fournisseur: string;
 
   @Column()
   description: string;
@@ -25,6 +29,9 @@ export class mission extends BaseEntity{
   @Column()
   datefin: Date;
 
+  @Column()
+  produit: string;
+
 
   @OneToMany(type => produit, (produit) => produit.mission,
     {
@@ -33,7 +40,6 @@ export class mission extends BaseEntity{
     }
   )
   produits : produit;
-
 
   @Column()
   statut: string;

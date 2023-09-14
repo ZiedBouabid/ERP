@@ -2,8 +2,10 @@ import { OneToMany, Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BaseEn
 import * as bcrypt from 'bcrypt';
 import { mission } from 'src/mission/entities/mission.entity';
 import { fournisseur } from 'src/fournisseur/entities/fournisseur.entity';
+import { Message } from 'src/message/entities/message.entity';
+import { Attestation } from 'src/attestation/entities/attestation.entity';
 @Entity()
-export class User extends BaseEntity{
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
   @Column()
@@ -15,6 +17,12 @@ export class User extends BaseEntity{
   @Column()
   role: string;
 
+  @Column()
+  statut: string;
+
+  @Column()
+  poste: string;
+
   @Column({ unique: true })
   email: string;
 
@@ -22,10 +30,10 @@ export class User extends BaseEntity{
   password: string;
 
   @Column()
-  tele : string;
+  tele: string;
 
   @Column()
-  secondeRole : string
+  secondeRole: string
 
   @OneToMany(
     type => mission,
@@ -45,6 +53,12 @@ export class User extends BaseEntity{
       cascade: true
     }
   )
-  fournisseur:fournisseur [];
+  fournisseur: fournisseur[];
+
+  @OneToMany(() => Message, (message) => message.user)
+  messages: Message[];
+
+  @OneToMany(() => Attestation, attestation => attestation.recipient)
+    attestations: Attestation[];
 
 }

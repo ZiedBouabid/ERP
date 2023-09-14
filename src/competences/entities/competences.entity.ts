@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BaseEntity, ManyToMany, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BaseEntity, ManyToMany, ManyToOne, JoinColumn } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { fournisseur } from 'src/fournisseur/entities/fournisseur.entity';
 @Entity()
